@@ -60,8 +60,6 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.java.version>1.8</project.java.version>
         <project.execution.environment>JavaSE-1.8</project.execution.environment>
-        <spock.version>0.7-groovy-2.0</spock.version>
-        <groovy.version>2.1.3</groovy.version>
         <asciidoctorj.version>2.4.1</asciidoctorj.version>
         <jruby.version>9.2.13.0</jruby.version>
         <maven.coveralls.plugin.version>4.3.0</maven.coveralls.plugin.version>
@@ -72,18 +70,19 @@
         <maven.filtering.version>3.1.1</maven.filtering.version>
         <plexus.utils.version>3.0.23</plexus.utils.version>
         <plexus.component.metadata.version>1.7</plexus.component.metadata.version>
-        <netty.version>4.0.38.Final</netty.version>
+        <netty.version>4.1.59.Final</netty.version>
         <commons.io.version>2.5</commons.io.version>
         <doxia.version>1.8</doxia.version>
-        <gmaven.version>1.5</gmaven.version>
     </properties>
 
     <dependencyManagement>
         <dependencies>
             <dependency>
-                <groupId>org.codehaus.groovy</groupId>
-                <artifactId>groovy-all</artifactId>
-                <version>${groovy.version}</version>
+                <groupId>org.junit</groupId>
+                <artifactId>junit-bom</artifactId>
+                <version>5.7.1</version>
+                <type>pom</type>
+                <scope>import</scope>
             </dependency>
         </dependencies>
     </dependencyManagement>
@@ -136,12 +135,6 @@
             <version>3.8.1</version>
         </dependency>
         <dependency>
-            <groupId>org.spockframework</groupId>
-            <artifactId>spock-core</artifactId>
-            <version>${spock.version}</version>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
             <groupId>io.netty</groupId>
             <artifactId>netty-codec-http</artifactId>
             <version>${netty.version}</version>
@@ -162,21 +155,25 @@
             <version>${doxia.version}</version>
         </dependency>
         <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter</artifactId>
+        </dependency>
+        <dependency>
             <groupId>org.assertj</groupId>
             <artifactId>assertj-core</artifactId>
-            <version>3.16.1</version>
+            <version>3.19.0</version>
             <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>org.mockito</groupId>
             <artifactId>mockito-core</artifactId>
-            <version>3.3.0</version>
+            <version>3.8.0</version>
             <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
-            <version>1.18.12</version>
+            <version>1.18.18</version>
             <scope>test</scope>
         </dependency>
     </dependencies>
@@ -223,39 +220,6 @@
                     <source>${project.java.version}</source>
                     <target>${project.java.version}</target>
                 </configuration>
-            </plugin>
-            <plugin>
-                <groupId>org.codehaus.gmaven</groupId>
-                <artifactId>gmaven-plugin</artifactId>
-                <version>${gmaven.version}</version>
-                <executions>
-                    <execution>
-                        <configuration>
-                            <providerSelection>2.0</providerSelection>
-                        </configuration>
-                        <goals>
-                            <goal>testCompile</goal>
-                        </goals>
-                    </execution>
-                </executions>
-                <dependencies>
-                    <dependency>
-                        <groupId>org.codehaus.gmaven.runtime</groupId>
-                        <artifactId>gmaven-runtime-2.0</artifactId>
-                        <version>${gmaven.version}</version>
-                        <exclusions>
-                            <exclusion>
-                                <groupId>org.codehaus.groovy</groupId>
-                                <artifactId>groovy-all</artifactId>
-                            </exclusion>
-                        </exclusions>
-                    </dependency>
-                    <dependency>
-                        <groupId>org.codehaus.groovy</groupId>
-                        <artifactId>groovy-all</artifactId>
-                        <version>${groovy.version}</version>
-                    </dependency>
-                </dependencies>
             </plugin>
             <plugin>
                 <groupId>org.eluder.coveralls</groupId>
